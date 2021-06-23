@@ -1,0 +1,61 @@
+@import "../_variables.scss";
+
+.offer__section {
+  width: 100%;
+  position: relative;
+  height: auto;
+  padding: 3rem 0 6rem 0;
+  .offer__title {
+    text-align: center;
+    h3 {
+      font-size: 2rem;
+      text-transform: capitalize;
+      font-weight: normal;
+      color: $secondary_text_color;
+    }
+  }
+  .offer__cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    .offer {
+      display: flex;
+      justify-content: center;
+      flex: 1 0 30%;
+      align-items: center;
+      h2 {
+        font-size: 7rem;
+        margin-right: 1rem;
+        font-weight: normal;
+        color: $primary_text_color;
+      }
+      h4 {
+        font-size: 2rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        color: $highlight_text_color;
+      }
+      p {
+        color: $primary_text_color;
+      }
+      @media (max-width: 600px) {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+  .offer__button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    button {
+      margin-top: 2rem;
+      text-transform: capitalize;
+      font-weight: 600;
+    }
+  }
+}

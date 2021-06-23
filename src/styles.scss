@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700;800&display=swap");
+
+@import "/src/app/_variables.scss";
+
+.spacer {
+  width: calc(100% - 20%);
+  margin: 0 auto;
+}
+.btn {
+  background-color: $primary_btn_bg;
+  padding: 0.7rem 2rem;
+  border-radius: 0.5rem;
+  border: transparent;
+  cursor: pointer;
+}
+
+/* UTILITY CLASSES */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  /* background: $primary_gradient; */
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main__wrapper {
+  background-color: $secondary_bg_color;
+  width: 100vw;
+  height: auto;
+}
+
+.hrline {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
