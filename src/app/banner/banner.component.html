@@ -1,13 +1,7 @@
 <div class="section__wrapper">
-    <owl-carousel-o [options]="customOptions">
-        <ng-template carouselSlide>
-            <img src="/assets/img/main__slider01.png" alt="">
-        </ng-template>
-        <ng-template carouselSlide>
-            <img src="/assets/img/main__slider01.png" alt="">
-        </ng-template>
-        <ng-template carouselSlide>
-            <img src="/assets/img/main__slider01.png" alt="">
-        </ng-template>
-    </owl-carousel-o>
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let img of images">
+      <img src="{{ img }}" alt="" />
+    </ng-template>
+  </owl-carousel-o>
 </div>

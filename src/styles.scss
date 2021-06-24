@@ -4,9 +4,15 @@
 
 @import "/src/app/_variables.scss";
 
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+
 .spacer {
   width: calc(100% - 20%);
   margin: 0 auto;
+  @media (max-width: 375px) {
+    width: calc(335px);
+  }
 }
 .btn {
   background-color: $primary_btn_bg;
@@ -14,6 +20,7 @@
   border-radius: 0.5rem;
   border: transparent;
   cursor: pointer;
+  width: max-content;
 }
 
 /* UTILITY CLASSES */
@@ -61,4 +68,5 @@ a {
 
 .hrline {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }

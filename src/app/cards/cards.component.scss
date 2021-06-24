@@ -9,19 +9,25 @@
 
   .card {
     position: relative;
-    width: 100%;
-    height: 30vh;
+    width: 360px;
+    height: 260px;
+    object-fit: cover;
+    // width: 100%;
+    // height: 30vh;
     margin: 2rem;
     border-radius: 1rem;
     background-size: cover;
     transition: 200ms transform ease-in-out;
     &:nth-child(1n) {
+      width: 100%;
+      background-size: cover;
       background-image: url(/assets/img/card01.png),
         linear-gradient(
           179.85deg,
           rgba(0, 0, 0, 0) 0.13%,
           rgba(30, 57, 132, 0.6) 99.87%
         );
+      background-repeat: no-repeat;
       background-blend-mode: multiply;
       &:hover {
         transform: scale(1.02);
@@ -59,10 +65,15 @@
       button {
         text-transform: capitalize;
         margin-top: 1rem;
+        width: max-content;
       }
     }
     @media (max-width: 600px) {
       width: 90%;
+      margin: 0 0 2rem 0;
+      &:last-child {
+        margin: 0 0 0 0;
+      }
     }
   }
   @media (max-width: 600px) {
