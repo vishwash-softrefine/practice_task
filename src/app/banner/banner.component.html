@@ -5,3 +5,12 @@
     </ng-template>
   </owl-carousel-o>
 </div>
+
+<input type="text" #newItem />
+
+<p [ngStyle]="{ 'font-size': +fontSize + 'px' }">{{ fontSize }}</p>
+<button (click)="inc()">+</button>
+<button (click)="desc()">-</button>
+<button (click)="reset()">Reset</button>
+
+<button (click)="addNewItem(newItem.value)">Get Value</button>

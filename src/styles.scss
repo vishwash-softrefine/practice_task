@@ -11,8 +11,16 @@
   width: calc(100% - 20%);
   margin: 0 auto;
   @media (max-width: 375px) {
-    width: calc(335px);
+    width: calc(375px - 40px);
   }
+}
+.owl-theme .owl-nav {
+  position: absolute !important;
+  /* left: 50%; */
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  margin-bottom: 10px !important;
 }
 .btn {
   background-color: $primary_btn_bg;

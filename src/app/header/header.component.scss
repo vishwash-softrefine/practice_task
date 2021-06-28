@@ -37,6 +37,9 @@ header {
             color: $secondary_text_color;
           }
         }
+        .active {
+          color: $secondary_text_color;
+        }
       }
     }
   }

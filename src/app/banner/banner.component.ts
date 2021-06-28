@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
+
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
@@ -13,6 +15,22 @@ export class BannerComponent implements OnInit {
     '../../assets/img/main__slider01.png',
   ];
 
+  @Output() newItemEvent = new EventEmitter<string>();
+
+  fontSize = 16;
+  desc() {
+    this.fontSize = this.fontSize - 1;
+  }
+  inc() {
+    this.fontSize = this.fontSize + 1;
+  }
+  reset() {
+    this.fontSize = 16;
+  }
+
+  addNewItem(value: string) {
+    this.newItemEvent.emit(value);
+  }
   constructor() {}
 
   ngOnInit(): void {}

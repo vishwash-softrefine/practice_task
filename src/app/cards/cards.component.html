@@ -1,24 +1,23 @@
 <div class="spacer">
-    <div class="card__section">
-        <div class="card">
-            <div class="card__content">
-                <h4>Sports</h4>
-                <button class="btn">go to sports</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card__content">
-                <h4>Casino </h4>
-                <button class="btn">go to sports</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card__content">
-                <h4>Live Casino</h4>
-                <button class="btn">go to sports</button>
-            </div>
-        </div>
+  <div class="card__section">
+    <div
+      class="card"
+      *ngFor="
+        let data of getcarddata.slice().reverse() | slice: 0:3;
+        let i = index
+      "
+      [ngStyle]="{
+        background: 'url(' + data.bgImg + ')',
+        backgroyndSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundBlendMode: 'multiply'
+      }"
+    >
+      <div class="card__content">
+        <h4>{{ data.name }}</h4>
+        <button class="btn">{{ data.btnText }}</button>
+      </div>
     </div>
-
+  </div>
 </div>
 <p class="hrline"></p>

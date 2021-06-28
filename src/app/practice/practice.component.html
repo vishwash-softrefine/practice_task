@@ -1,0 +1,101 @@
+<div class="main__practice">
+  <input #box type="text" placeholder="Username" [(ngModel)]="getvalue" />
+  <br />
+  {{ getvalue }}
+
+  <button [disabled]="getvalue === ''" (click)="getvalue = ''">
+    Click to process
+  </button>
+  <div [ngStyle]="{ width: '100%', textAlign: 'center' }">
+    <form
+      (ngSubmit)="onSubmit()"
+      #f="ngForm"
+      [ngStyle]="{
+        padding: '20px',
+        width: '70%',
+        margin: '0 auto',
+        height: 'auto'
+      }"
+    >
+      <label for="">Username</label><br />
+      <input
+        type="text"
+        name="username"
+        ngModel
+        #username="ngModel"
+        required
+      /><br />
+      <label for="">Email</label><br />
+      <input
+        type="text"
+        name="emailids"
+        ngModel
+        #email="ngModel"
+        required
+      /><br />
+      <label for="">Country</label><br />
+      <select name="country" [ngModel]="defaultContry">
+        <option value="india">India</option>
+        <option value="canada">Canada</option>
+        <option value="uk">Uk</option>
+      </select>
+      <br />
+      <div *ngFor="let gender of genders">
+        <input
+          type="radio"
+          name="gender"
+          #gender="ngModel"
+          [ngModel]="defaultGender"
+          value="{{ gender }}"
+        />
+        {{ gender }}
+      </div>
+      <!-- <button (click)="addSkills()">Skills +</button>
+      <div *ngFor="let x of inputSkillsArray.control; let i = index">
+        <input type="text" [formControlName]="i" />
+      </div> -->
+      <textarea name="questionAns" [(ngModel)]="answer" rows="10"></textarea>
+      <p>Your Ans : {{ answer }}</p>
+      <button [disabled]="!f.valid" type="submit" value="submit">Submit</button>
+    </form>
+    <hr />
+    <p>
+      {{ user | json }}
+    </p>
+  </div>
+
+  <div [ngStyle]="{ width: '100%', textAlign: 'center', marginTop: '10px' }">
+    <form [formGroup]="SignUpForm" (ngSubmit)="submitReactiveData()">
+      username: <br />
+      <input formControlName="inputUserName" type="text" name="inputUserName" />
+      <br />
+      <button (click)="updateName()">Update Name</button>
+      <br />
+      <div formGroupName="inputUserDetails">
+        Address : <br />
+        <input formControlName="inputAdd" type="text" name="inputAdd" />
+        <br />
+        Email : <br />
+        <input formControlName="inputEmail" type="text" name="inputEmail" />
+        <br />
+        <div *ngFor="let gen of genders">
+          <input
+            type="radio"
+            name="inputGender"
+            formControlName="inputGender"
+            value="{{ gen }}"
+          />
+          {{ gen }}
+        </div>
+      </div>
+
+      <input type="checkbox" name="inputActive" formControlName="inputActive" />
+      IsActive <br />
+      <button type="submit" [disabled]="SignUpForm.invalid" value="submit">
+        Submit
+      </button>
+    </form>
+    <p *ngIf="SignUpForm.value !== ''">{{ SignUpForm.value | json }}</p>
+    <p>Form Status is : {{ SignUpForm.status }}</p>
+  </div>
+</div>

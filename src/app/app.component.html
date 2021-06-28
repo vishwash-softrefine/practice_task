@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="main__wrapper">
-    <app-banner></app-banner>
-    <app-offer></app-offer>
-    <app-cards></app-cards>
+  <app-banner (newItemEvent)="addItem($event)"> </app-banner>
+  <app-offer></app-offer>
+  <app-cards></app-cards>
 </div>
+<router-outlet></router-outlet>
 <app-footer></app-footer>
