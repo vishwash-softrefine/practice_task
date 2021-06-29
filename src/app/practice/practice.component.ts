@@ -21,8 +21,10 @@ export class PracticeComponent implements OnInit {
   defaultContry = 'india';
   answer = '';
   genders = ['male', 'female'];
-  defaultGender = 'male';
+  defaultStatus = 'checked';
   getvalue: any = [];
+  skillsdisable = true;
+  deleteButton = false;
   user = {
     username: '',
     emailids: '',
@@ -34,23 +36,50 @@ export class PracticeComponent implements OnInit {
   //  Reactive Form All Data
 
   SignUpForm = this.fb.group({
-    inputUserName: ['', Validators.required],
+    inputUserName: [
+      '',
+      Validators.compose([
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(10),
+      ]),
+    ],
     inputUserDetails: this.fb.group({
-      inputAdd: [''],
-      inputEmail: [''],
+      inputAdd: ['', [Validators.required]],
+      inputEmail: ['', [Validators.pattern, Validators.required]],
       inputGender: [''],
     }),
-    // inputSkillsArray: this.fb.array([this.fb.control('')]),
     inputActive: [''],
+    skills: this.fb.array([this.fb.control(null, [Validators.required])]),
   });
-  // get inputSkillsArray() {
-  //   return this.SignUpForm.get('skills') as FormArray;
+
+  get skills() {
+    return this.SignUpForm.get('skills') as FormArray;
+  }
+  addSkills() {
+    this.deleteButton = true;
+    console.log(this.skills.status);
+    this.skillsdisable = false;
+    const control = this.fb.control(null, [Validators.required]);
+    this.skills.push(control);
+  }
+  // removeSkill(id: number) {
+  //   console.log(id);
+  //   this.skills.removeAt(id);
   // }
-  // addSkills() {
-  //   this.inputSkillsArray.push(this.fb.control(''));
-  // }
+
+  get userNameData() {
+    return this.SignUpForm.get('inputUserName');
+  }
+  get addessData() {
+    return this.SignUpForm.get('inputUserDetails.inputAdd');
+  }
+  get emailData() {
+    return this.SignUpForm.get('inputUserDetails.inputEmail');
+  }
+
   submitReactiveData() {
-    console.log(this.SignUpForm);
+    console.log(this.SignUpForm.value);
   }
   updateName() {
     this.SignUpForm.patchValue({

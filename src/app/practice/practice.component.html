@@ -1,4 +1,5 @@
 <div class="main__practice">
+  <!--
   <input #box type="text" placeholder="Username" [(ngModel)]="getvalue" />
   <br />
   {{ getvalue }}
@@ -7,32 +8,16 @@
     Click to process
   </button>
   <div [ngStyle]="{ width: '100%', textAlign: 'center' }">
-    <form
-      (ngSubmit)="onSubmit()"
-      #f="ngForm"
-      [ngStyle]="{
+    <form (ngSubmit)="onSubmit()" #f="ngForm" [ngStyle]="{
         padding: '20px',
         width: '70%',
         margin: '0 auto',
         height: 'auto'
-      }"
-    >
+      }">
       <label for="">Username</label><br />
-      <input
-        type="text"
-        name="username"
-        ngModel
-        #username="ngModel"
-        required
-      /><br />
+      <input type="text" name="username" ngModel #username="ngModel" required /><br />
       <label for="">Email</label><br />
-      <input
-        type="text"
-        name="emailids"
-        ngModel
-        #email="ngModel"
-        required
-      /><br />
+      <input type="text" name="emailids" ngModel #email="ngModel" required /><br />
       <label for="">Country</label><br />
       <select name="country" [ngModel]="defaultContry">
         <option value="india">India</option>
@@ -41,57 +26,83 @@
       </select>
       <br />
       <div *ngFor="let gender of genders">
-        <input
-          type="radio"
-          name="gender"
-          #gender="ngModel"
-          [ngModel]="defaultGender"
-          value="{{ gender }}"
-        />
+        <input type="radio" name="gender" #gender="ngModel" [ngModel]="defaultGender" value="{{ gender }}" />
         {{ gender }}
       </div>
       <!-- <button (click)="addSkills()">Skills +</button>
       <div *ngFor="let x of inputSkillsArray.control; let i = index">
         <input type="text" [formControlName]="i" />
       </div> -->
-      <textarea name="questionAns" [(ngModel)]="answer" rows="10"></textarea>
-      <p>Your Ans : {{ answer }}</p>
-      <button [disabled]="!f.valid" type="submit" value="submit">Submit</button>
+  <!--
+    <textarea name="questionAns" [(ngModel)]="answer" rows="10"></textarea>
+    <p>Your Ans : {{ answer }}</p>
+    <button [disabled]="!f.valid" type="submit" value="submit">Submit</button>
     </form>
-    <hr />
-    <p>
-      {{ user | json }}
-    </p>
-  </div>
+  <hr />
+  <p>
+    {{ user | json }}
+  </p>
+</div>
+ -->
 
+  SignUpForm.value.inputUserName.hasError
   <div [ngStyle]="{ width: '100%', textAlign: 'center', marginTop: '10px' }">
     <form [formGroup]="SignUpForm" (ngSubmit)="submitReactiveData()">
       username: <br />
-      <input formControlName="inputUserName" type="text" name="inputUserName" />
+      <input formControlName="inputUserName" type="text" />
+      <br>
+      <span *ngIf="userNameData?.hasError('required') && userNameData?.touched">Username
+        is required</span>
+      <span *ngIf="userNameData?.hasError('minlength')">username
+        Should be more than 5 character</span>
+      <span *ngIf="userNameData?.hasError('maxlength')">username
+        Should be not more than 10 character</span>
       <br />
       <button (click)="updateName()">Update Name</button>
       <br />
       <div formGroupName="inputUserDetails">
         Address : <br />
-        <input formControlName="inputAdd" type="text" name="inputAdd" />
+        <input formControlName="inputAdd" type="text" />
+        <br>
+        <span *ngIf="addessData?.hasError('required') && addessData?.touched">Address
+          is required</span>
         <br />
         Email : <br />
-        <input formControlName="inputEmail" type="text" name="inputEmail" />
+        <input formControlName="inputEmail" type="text" name="inputEmail"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+        <br>
+        <span *ngIf="emailData?.hasError('required') && emailData?.touched">email
+          is required</span>
+        <span *ngIf="emailData?.hasError('pattern') && emailData?.touched">valid
+          email address required</span>
         <br />
         <div *ngFor="let gen of genders">
-          <input
-            type="radio"
-            name="inputGender"
-            formControlName="inputGender"
-            value="{{ gen }}"
-          />
+          <input type="radio" name='inputGender' formControlName="inputGender" value="{{ gen }}" required />
           {{ gen }}
         </div>
+        <!-- <br>
+        <span
+          *ngIf="SignUpForm.get('inputUserDetails.inputGender')?.hasError('required') && SignUpForm.get('inputUserDetails.inputGender')?.touched">Username
+          is required</span> -->
+      </div>
+      <div formArrayName="skills">
+        <ng-container *ngFor="let skill of skills.controls ;let i=index">
+          {{skill.value}}
+          <input type="text" formControlName='{{ i }}'>
+          <!-- <button *ngIf="deleteButton" (click)="removeSkill(skill.value)">Remove Skill</button> -->
+          <br>
+        </ng-container>
+        <br>
+        <button [disabled]="!skills.valid" (click)='addSkills()'>Add Skill</button>
       </div>
 
-      <input type="checkbox" name="inputActive" formControlName="inputActive" />
+      <input type="checkbox" name="inputActive" formControlName="inputActive" required />
       IsActive <br />
-      <button type="submit" [disabled]="SignUpForm.invalid" value="submit">
+      <br>
+      <span
+        *ngIf="SignUpForm.get('inputActive')?.hasError('required') && SignUpForm.get('inputActive')?.touched">Username
+        is required</span>
+      <button type="submit" [disabled]="!SignUpForm.valid" value="submit">
         Submit
       </button>
     </form>
