@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import {
@@ -8,16 +14,57 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
+import { fromEvent } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import { AppServiceService } from '../app-service.service';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-practice',
   templateUrl: './practice.component.html',
   styleUrls: ['./practice.component.scss'],
 })
-export class PracticeComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+export class PracticeComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('myInput') myInput: ElementRef | undefined;
+
+  constructor(
+    private fb: FormBuilder,
+    private loader: LoadingBarService,
+    private exclusiveSev: AppServiceService
+  ) {}
 
   @ViewChild('f') signUpPage: NgForm | undefined;
+  streamData: any = null;
+
+  ngOnInit(): void {
+    this.exclusiveSev.exclusive.next(true);
+  }
+  ngOnDestroy(): void {
+    this.exclusiveSev.exclusive.next(false);
+  }
+
+  ngAfterViewInit() {
+    const searchTerm = fromEvent<any>(
+      this.myInput?.nativeElement,
+      'keyup'
+    ).pipe(
+      map((e) => e.target.value),
+      debounceTime(1000),
+      distinctUntilChanged()
+    );
+    searchTerm.subscribe((res) => {
+      console.log(res);
+      this.streamData = res;
+      this.loader.start();
+      this;
+      setTimeout(() => {
+        this.loader.stop();
+        this.streamData = null;
+      }, 1000);
+    });
+  }
+
   defaultContry = 'india';
   answer = '';
   genders = ['male', 'female'];
@@ -118,5 +165,4 @@ export class PracticeComponent implements OnInit {
       };
     }, 2000);
   }
-  ngOnInit(): void {}
 }

@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PracticeComponent } from './practice/practice.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdersModule } from './orders/orders.module';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { OrdersModule } from './orders/orders.module';
     FormsModule,
     ReactiveFormsModule,
     OrdersModule,
+    LoadingBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
